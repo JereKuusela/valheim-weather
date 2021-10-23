@@ -1,0 +1,19 @@
+body { margin: 0; width: 100%; height: 100%; }
+
+table {
+ width: 600px;   
+}
+
+table, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+thead, td:first-child {
+ background: lightgray;  
+}
+
+td {
+    padding: 5px;
+    width: 20%;
+}
