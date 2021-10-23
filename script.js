@@ -233,6 +233,7 @@ const forecastWeather = (day) => {
 
 const forecast = () => {
     $("tr").find("td").not(':first-child').remove();
+    addCell("wind_time", '');
     const day = Math.max(0, Number($("#day").val()));
     forecastWeather(day);
     forecastWind(day);
