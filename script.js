@@ -131,7 +131,7 @@ const getGlobalWind = (time) => {
     wind.intensity = Math.min(1, Math.max(0, wind.intensity));
     wind.angle = wind.angle * 180 / Math.PI;
     while (wind.angle > 180) wind.angle -= 360;
-    wind.from = wind.ange + 180;
+    wind.from = wind.angle + 180;
     while (wind.from > 180) wind.from -= 360;
     return wind;
 };
