@@ -121,7 +121,8 @@ const addOctave = (time, octave, wind) => {
 const getGlobalWind = (time) => {
     const wind = {
         angle: 0,
-        intensity: 0.5
+        intensity: 0.5,
+        from: 0,
     };
     addOctave(time, 1, wind);
     addOctave(time, 2, wind);
@@ -130,6 +131,8 @@ const getGlobalWind = (time) => {
     wind.intensity = Math.min(1, Math.max(0, wind.intensity));
     wind.angle = wind.angle * 180 / Math.PI;
     while (wind.angle > 180) wind.angle -= 360;
+    wind.from = wind.ange + 180;
+    while (wind.from > 180) wind.from -= 360;
     return wind;
 };
 
@@ -195,8 +198,10 @@ const forecastWind = (day) => {
         let header = secondsToTime(time);
         if (index === (day === 1 ? 2 : 1)) header = "Day " + day;
         addCell("wind_time", header);
-        addCell("wind_angle", angle(wind.angle));
-        addCell("wind_degrees", wind.angle.toFixed(0) + "&#176;");
+        addCell("wind_from", angle(wind.from));
+        addCell("wind_degrees_from", wind.from.toFixed(0) + "&#176;");
+        addCell("wind_to", angle(wind.angle));
+        addCell("wind_degrees_to", wind.angle.toFixed(0) + "&#176;");
         addCell("wind_intensity", percent(wind.intensity));
         Object.keys(data).forEach(biome => {
             const weather = getWeather(getBiome(biome, weatherPeriod), weatherRoll);
